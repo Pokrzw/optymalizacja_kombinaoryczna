@@ -1,0 +1,2 @@
+# optymalizacja_kombinaoryczna
+Optymalizacja kombinatoryczna
