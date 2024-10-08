@@ -1,6 +1,3 @@
-from termcolor import cprint
-
-
 class GrafNieskierowany:
 
     def __init__(self, wierzcholki) -> None:
@@ -23,6 +20,7 @@ class GrafNieskierowany:
                 if w in krawedz:
                     self.krawedzie.remove(krawedz)
 
+            #błąd - w trakcie iteracji zmienia sie rozmiar slownika
             for wierzcholek in self.mappings:
                 if wierzcholek==w:
                     self.mappings.pop(w, None)
@@ -33,6 +31,7 @@ class GrafNieskierowany:
 
     
     def addKrawedzie(self, w1, w2):
+        #mozna dodawać ta sama krawedz, nie powinno tak byc
         if w1 not in self.wierzcholki or w2 not in self.wierzcholki:
             print("Nie mozna stworzyc krawędzi dla nieistniejącego wierzchołka")
         if (w1, w2) in self.mappings or (w2, w1) in self.mappings:
@@ -50,6 +49,7 @@ class GrafNieskierowany:
             self.stopienWierzcholka(w2)
     
     def usunKrawedzie(self, w1, w2):
+        #nie powinno moc sie wywolywac dla krawedzi, ktorej nie ma, bez powtorek(?)
         if(w1 not in self.wierzcholki or w2 not in self.wierzcholki):
             print("Nie mozna usunac krawędzi dla nieistniejącego wierzchołka")
         else:
@@ -105,9 +105,9 @@ class GrafNieskierowany:
                 res2.append(stopien)
 
         return res2
-    
 
     def sortedStopnie(self):
+        #None?
         res = self.stopienWszystkichWierzcholkow()
         return res.sort(reverse=True)
 
@@ -124,7 +124,8 @@ graf1.addKrawedzie("A", "D")
 print(graf1.krawedzie)
 print(graf1.mappings)
 print(graf1.stopnie)
-graf1.usunKrawedzie("A", "B")
+graf1.deleteWierzcholki("A")
+# graf1.usunKrawedzie("A", "B")
 print(graf1.wierzcholki)
 print(graf1.krawedzie)
 print(graf1.mappings)
