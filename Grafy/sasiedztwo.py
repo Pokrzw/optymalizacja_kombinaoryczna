@@ -17,13 +17,14 @@ for v in vertices:
 print(matrix_base)
 
 
-# for x in vertices:
-#     mini_matrix = [0] * len(vertices)
-#     adj_vertices = edges_mappings[x]
-#     for adj_vertex in adj_vertices:
-#         i = vertices.index(adj_vertex)
-#         mini_matrix[i] = 1
-#     matrix_base[index] = mini_matrix
-#     index=+1
+index = 0
+for x in vertices:
+    mini_matrix = [0] * len(vertices)
+    adj_vertices = edges_mappings[x]
+    for adj_vertex in adj_vertices:
+        i = vertices.index(adj_vertex)
+        mini_matrix[i] = 1
+    matrix_base[index] = mini_matrix
+    index=+1
 
-# print(matrix_base)
+pprint(matrix_base)
