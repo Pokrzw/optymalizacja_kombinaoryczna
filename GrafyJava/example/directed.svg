@@ -1,8 +1,8 @@
-<svg width="859px" height="300px"
- viewBox="0.00 0.00 332.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1.0 1.0) rotate(0.0) translate(4.0 112.0)">
+<svg width="1487px" height="300px"
+ viewBox="0.00 0.00 332.00 67.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1.0 1.0) rotate(0.0) translate(4.0 63.0)">
 <title>x</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 328,-112 328,4 -4,4"/>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-63 328,-63 328,4 -4,4"/>
 <!-- 0 -->
 <g id="node1" class="node">
 <title>0</title>
@@ -68,18 +68,6 @@
 <title>3&#45;&gt;2</title>
 <path fill="none" stroke="black" d="M269.92,-41C261.95,-41 253.04,-41 244.52,-41"/>
 <polygon fill="black" stroke="black" points="244.4,-37.5 234.4,-41 244.4,-44.5 244.4,-37.5"/>
-</g>
-<!-- P -->
-<g id="node5" class="node">
-<title>P</title>
-<ellipse fill="none" stroke="black" cx="27" cy="-72" rx="27" ry="18"/>
-<text text-anchor="middle" x="27" y="-67.8" font-family="Times,serif" font-size="14.00">P</text>
-</g>
-<!-- P&#45;&gt;P -->
-<g id="8" class="edge link&#45;class">
-<title>P&#45;&gt;P</title>
-<path fill="none" stroke="black" d="M11.77,-87.17C7.16,-97.66 12.23,-108 27,-108 36.92,-108 42.47,-103.33 43.64,-97.09"/>
-<polygon fill="black" stroke="black" points="47.1,-96.57 42.23,-87.17 40.17,-97.56 47.1,-96.57"/>
 </g>
 </g>
 </svg>
