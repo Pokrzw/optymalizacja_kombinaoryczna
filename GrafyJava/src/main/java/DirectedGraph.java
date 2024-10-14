@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class DirectedGraph {
+public class DirectedGraph implements IGraph {
     private ArrayList<Vertex> vertices;
     private ArrayList<Edge> edges;
     //Stopnie wchodzace
@@ -17,56 +18,60 @@ public class DirectedGraph {
         this.outDeg = new HashMap<>();
     }
 
+    public DirectedGraph(List<Edge> edges){
+        this.vertices = new ArrayList<>();
+        this.edges = new ArrayList<>();
+        this.inDeg = new HashMap<>();
+        this.outDeg = new HashMap<>();
+
+        for (Edge e: edges){
+            addVertex(e.getA()).addVertex(e.getB()).addEdge(e);
+        }
+    }
+
 
     public ArrayList<Vertex> getVertices() {return vertices;}
     public ArrayList<Edge> getEdges() {return edges;}
     public HashMap<Vertex, ArrayList<Vertex>> getInDeg() {return inDeg;}
     public HashMap<Vertex, ArrayList<Vertex>> getOutDeg() {return outDeg;}
 
-    public void addVertex(Vertex a){
+    public DirectedGraph addVertex(Vertex a){
         if(!vertices.contains(a)){
             vertices.add(a);
         }
+        return this;
     }
 
-    public void addEdge(Edge e){
-        //1. SPRAWDZIC CZY ISTNIEJA ODPOWIEDNIE WIERZCHOLKI
+    public DirectedGraph addEdge(Edge e){
         if(!vertices.contains(e.getA()) || !vertices.contains(e.getB())) {
-            return;
+            return this;
         }
-        //2. SPRAWDZIC CZY NIE POWTARZAJA SIE KRAWEDZIE
         ArrayList<Vertex> checkedEdge = e.getConnection();
         for(Edge f: edges){
             ArrayList<Vertex> currentEdge = f.getConnection();
             if(checkedEdge.equals(currentEdge)){
-                return;
+                return this;
             }
         }
-        //3. DODAC DO LISTY
         edges.add(e);
-        //4. DODAC ZALEZNOSCI
+
         addMappings(e.getA(), e.getB(), outDeg);
         addMappings(e.getB(), e.getA(), inDeg);
-
+        return this;
     }
 
     private void addMappings(Vertex a, Vertex b, HashMap<Vertex, ArrayList<Vertex>> mapList){
         if(!mapList.containsKey(a)){
             mapList.put(a, new ArrayList<>());
         }
-
         ArrayList<Vertex> newAList = mapList.get(a);
         newAList.add(b);
-
         mapList.put(a, newAList);
     }
 
-    public void removeVertex(Vertex a){
-        //1. Usun vertex z vertex
+    public DirectedGraph removeVertex(Vertex a){
         vertices.remove(a);
-
         ArrayList<Edge> newEdges = new ArrayList<>(edges);
-        //2. Usun krawedzie zawierajace vertex
         for(Edge e: edges){
             if(e.getConnection().contains(a)){
                 newEdges.remove(e);
@@ -101,14 +106,15 @@ public class DirectedGraph {
                 newInDeg.put(currentVertex.getKey(), currValues);
             }
         }
-
         inDeg = newInDeg;
+
+        return this;
     }
 
-    public void removeEdge(Edge e){
+    public DirectedGraph removeEdge(Edge e){
         //1. SPRAWDZIC CZY ISTNIEJA ODPOWIEDNIE WIERZCHOLKI
         if(!vertices.contains(e.getA()) || !vertices.contains(e.getB())) {
-            return;
+            return this;
         }
         //1. Usun z edges
         ArrayList<Vertex> checkedEdge = e.getConnection();
@@ -145,7 +151,7 @@ public class DirectedGraph {
         }
 
         outDeg = newOutDeg;
-        //3. Usunac mappingi inDeg
+        return this;
     }
 
     public int getOutDeg(Vertex a){

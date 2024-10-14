@@ -1,18 +1,23 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class UndirectedGraph {
+public class UndirectedGraph implements IGraph{
     private ArrayList<Vertex> vertices;
     private ArrayList<Edge> edges;
     private HashMap<Vertex, ArrayList<Vertex>> mappings;
-
 
     public UndirectedGraph() {
         this.vertices = new ArrayList<>();
         this.edges = new ArrayList<>();
         this.mappings = new HashMap<>();
+    }
+
+    public UndirectedGraph(List<Edge> edges){
+        this.vertices = new ArrayList<>();
+        this.edges = new ArrayList<>();
+        this.mappings = new HashMap<>();
+        for (Edge e: edges){
+            addVertex(e.getA()).addVertex(e.getB()).addEdge(e);
+        }
     }
 
     public ArrayList<Vertex> getVertices() {
@@ -25,16 +30,17 @@ public class UndirectedGraph {
         return mappings;
     }
 
-
-    public void addVertex(Vertex a){
+    public UndirectedGraph addVertex(Vertex a){
         if(!vertices.contains(a)){
             vertices.add(a);
         }
+        return this;
     }
-    private void dissolve(Vertex a){
+    private void dissolveEdge(Vertex a){
         edges.removeIf(e -> e.getConnection().contains(a));
     }
-    private void addMappings(Vertex a, Vertex b){
+
+    private void addEdgeMappings(Vertex a, Vertex b){
         if(!mappings.containsKey(a)){
             mappings.put(a, new ArrayList<>());
         }
@@ -51,7 +57,7 @@ public class UndirectedGraph {
         mappings.put(b, newBList);
     }
 
-    private void removeMappings(Vertex a){
+    private void removeVertexMappings(Vertex a){
         HashMap<Vertex, ArrayList<Vertex>> newMappings = new HashMap<>(mappings);
 
         for (Map.Entry<Vertex, ArrayList<Vertex>> currentVertex:  mappings.entrySet()){
@@ -67,41 +73,38 @@ public class UndirectedGraph {
         mappings = newMappings;
     }
 
-    public void deleteVertex(Vertex a){
-        //1. DISSOLVOWANIE EDGES ZAWIERAJACYCH VERTEX
-        dissolve(a);
-       //2. USUWANIE ZALEZNOSCI
-        removeMappings(a);
-      //3. WYWALANIE VERTEX Z LISTY VERTICES
+    public UndirectedGraph removeVertex(Vertex a){
+        dissolveEdge(a);
+        removeVertexMappings(a);
         vertices.remove(a);
+        return this;
     }
 
-    public void addEdge(Edge e){
+    public UndirectedGraph addEdge(Edge e){
         //1. SPRAWDZIC CZY ISTNIEJA ODPOWIEDNIE WIERZCHOLKI
         if(!vertices.contains(e.getA()) || !vertices.contains(e.getB())) {
-            return;
+            return this;
         }
         //2. SPRAWDZIC CZY NIE POWTARZAJA SIE KRAWEDZIE
         ArrayList<Vertex> checkedEdge = e.getConnection();
         for(Edge f: edges){
             ArrayList<Vertex> currentEdge = f.getConnection();
             if(checkedEdge.equals(currentEdge) || checkedEdge.reversed().equals(currentEdge)){
-                return;
+                return this;
             }
         }
         //3. DODAC DO LISTY
         edges.add(e);
         //4. DODAC ZALEZNOSCI
-        addMappings(e.getA(), e.getB());
+        addEdgeMappings(e.getA(), e.getB());
+        return this;
     }
 
-    public void removeEdge(Edge e){
-        //1. SPRAWDZIC CZY ISTNIEJA ODPOWIEDNIE WIERZCHOLKI
+    public UndirectedGraph removeEdge(Edge e){
         if(!vertices.contains(e.getA()) || !vertices.contains(e.getB())) {
-            return;
+            return this;
         }
 
-        //2. SPRAWDZIC CZY ISTNIEJE KRAWEDZ
         ArrayList<Vertex> checkedEdge = e.getConnection();
         for(Edge f: edges){
             ArrayList<Vertex> currentEdge = f.getConnection();
@@ -110,16 +113,10 @@ public class UndirectedGraph {
             }
         }
         edges.remove(e);
-
-
-//ZROBIC MAPPINGI DLA USUWANIA EDGES -> BEZ USUWANIA KOMPLETNEGO KLUCZA
-//        removeMappingsFor2(e.getA(), e.getB());
-//        removeMappings(e.getA());
-//        removeMappings(e.getB());
         removeEdgeMapping(e);
-
+        return this;
     }
-    public void removeEdgeMapping(Edge e){
+    private void removeEdgeMapping(Edge e){
         HashMap<Vertex, ArrayList<Vertex>> newMappings = new HashMap<>(mappings);
         Vertex v1 = e.getA();
         Vertex v2 = e.getB();
@@ -179,14 +176,14 @@ public class UndirectedGraph {
         return evenDegs;
     }
 
-    public int getUnevenDeg(){
-        int unevenDegs = 0;
+    public int getOddDeg(){
+        int oddDeg = 0;
         for(Map.Entry<Vertex, ArrayList<Vertex>> currentVertex: mappings.entrySet()){
             if(currentVertex.getValue().size()%2!=0){
-                unevenDegs++;
+                oddDeg++;
             }
         }
-        return unevenDegs;
+        return oddDeg;
     }
 
     public ArrayList<Integer> sortedDegs(){
