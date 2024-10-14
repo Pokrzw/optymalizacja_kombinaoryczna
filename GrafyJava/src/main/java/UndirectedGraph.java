@@ -66,7 +66,7 @@ public class UndirectedGraph implements IGraph{
             }
             if (currentVertex.getValue().contains(a)){
                 ArrayList<Vertex> currValues = currentVertex.getValue();
-                currValues.remove(a);
+                currValues.removeIf(vertex -> vertex.getName().equals(a.getName()));
                 newMappings.put(currentVertex.getKey(), currValues);
             }
         }
@@ -86,13 +86,13 @@ public class UndirectedGraph implements IGraph{
             return this;
         }
         //2. SPRAWDZIC CZY NIE POWTARZAJA SIE KRAWEDZIE
-        ArrayList<Vertex> checkedEdge = e.getConnection();
-        for(Edge f: edges){
-            ArrayList<Vertex> currentEdge = f.getConnection();
-            if(checkedEdge.equals(currentEdge) || checkedEdge.reversed().equals(currentEdge)){
-                return this;
-            }
-        }
+//        ArrayList<Vertex> checkedEdge = e.getConnection();
+//        for(Edge f: edges){
+//            ArrayList<Vertex> currentEdge = f.getConnection();
+//            if(checkedEdge.equals(currentEdge) || checkedEdge.reversed().equals(currentEdge)){
+//                return this;
+//            }
+//        }
         //3. DODAC DO LISTY
         edges.add(e);
         //4. DODAC ZALEZNOSCI
@@ -122,6 +122,11 @@ public class UndirectedGraph implements IGraph{
         Vertex v2 = e.getB();
 
         for (Map.Entry<Vertex, ArrayList<Vertex>> currentVertex:  mappings.entrySet()){
+            if(currentVertex.getKey()== v2 && v1==v2){
+                ArrayList<Vertex> currValues = currentVertex.getValue();
+                currValues.remove(v1);
+                newMappings.put(currentVertex.getKey(), currValues);
+            }
             if (currentVertex.getKey()== v2){
                 ArrayList<Vertex> currValues = currentVertex.getValue();
                 currValues.remove(v1);

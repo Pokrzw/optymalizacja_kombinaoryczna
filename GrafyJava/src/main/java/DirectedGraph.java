@@ -49,9 +49,9 @@ public class DirectedGraph implements IGraph {
         ArrayList<Vertex> checkedEdge = e.getConnection();
         for(Edge f: edges){
             ArrayList<Vertex> currentEdge = f.getConnection();
-            if(checkedEdge.equals(currentEdge)){
-                return this;
-            }
+//            if(checkedEdge.equals(currentEdge)){
+//                return this;
+//            }
         }
         edges.add(e);
 
@@ -64,8 +64,12 @@ public class DirectedGraph implements IGraph {
         if(!mapList.containsKey(a)){
             mapList.put(a, new ArrayList<>());
         }
+
         ArrayList<Vertex> newAList = mapList.get(a);
         newAList.add(b);
+        if (a.getName().equals(b.getName())){
+            newAList.add(b);
+        }
         mapList.put(a, newAList);
     }
 
@@ -102,7 +106,7 @@ public class DirectedGraph implements IGraph {
 
             if(currentVertex.getValue().contains(a)){
                 ArrayList<Vertex> currValues = currentVertex.getValue();
-                currValues.remove(a);
+                currValues.removeIf(vertex -> vertex.getName().equals(a.getName()));
                 newInDeg.put(currentVertex.getKey(), currValues);
             }
         }
@@ -120,7 +124,7 @@ public class DirectedGraph implements IGraph {
         ArrayList<Vertex> checkedEdge = e.getConnection();
         for(Edge f: edges){
             ArrayList<Vertex> currentEdge = f.getConnection();
-            if(checkedEdge.equals(currentEdge) || checkedEdge.reversed().equals(currentEdge)){
+            if(checkedEdge.equals(currentEdge)){
                 e = f;
             }
         }
@@ -133,9 +137,16 @@ public class DirectedGraph implements IGraph {
         HashMap<Vertex, ArrayList<Vertex>> newInDeg = new HashMap<>(inDeg);
         for (Map.Entry<Vertex, ArrayList<Vertex>> currentVertex:  inDeg.entrySet()){
             if(currentVertex.getKey().equals(b) && currentVertex.getValue().contains(a)){
-                ArrayList<Vertex> currValues = currentVertex.getValue();
-                currValues.remove(a);
-                newInDeg.put(currentVertex.getKey(), currValues);
+                if (b==a){
+                    ArrayList<Vertex> currValues = currentVertex.getValue();
+                    currValues.remove(a);
+                    currValues.remove(a);
+                    newInDeg.put(currentVertex.getKey(), currValues);
+                } else{
+                    ArrayList<Vertex> currValues = currentVertex.getValue();
+                    currValues.remove(a);
+                    newInDeg.put(currentVertex.getKey(), currValues);
+                }
             }
         }
 
@@ -144,6 +155,16 @@ public class DirectedGraph implements IGraph {
         HashMap<Vertex, ArrayList<Vertex>> newOutDeg = new HashMap<>(outDeg);
         for (Map.Entry<Vertex, ArrayList<Vertex>> currentVertex:  outDeg.entrySet()){
             if(currentVertex.getKey().equals(a) && currentVertex.getValue().contains(b)){
+                if (b==a){
+                    ArrayList<Vertex> currValues = currentVertex.getValue();
+                    currValues.remove(a);
+                    currValues.remove(a);
+                    newInDeg.put(currentVertex.getKey(), currValues);
+                } else {
+                    ArrayList<Vertex> currValues = currentVertex.getValue();
+                    currValues.remove(a);
+                    newInDeg.put(currentVertex.getKey(), currValues);
+                }
                 ArrayList<Vertex> currValues = currentVertex.getValue();
                 currValues.remove(b);
                 newOutDeg.put(currentVertex.getKey(), currValues);
@@ -155,10 +176,14 @@ public class DirectedGraph implements IGraph {
     }
 
     public int getOutDeg(Vertex a){
-        return outDeg.get(a).size();
+        if(!vertices.contains(a))
+            return -1;
+        return outDeg.computeIfAbsent(a, _ -> new ArrayList<>()).size();
     }
 
     public int getInDeg(Vertex a){
-        return inDeg.get(a).size();
+        if(!vertices.contains(a))
+                return -1;
+        return inDeg.computeIfAbsent(a, _ -> new ArrayList<>()).size();
     }
 }

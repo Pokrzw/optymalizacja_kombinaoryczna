@@ -1,9 +1,11 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class AdjacencyMatrix {
 
-    public static int[][] adjacencyUndirected(ArrayList<Vertex> vertices, ArrayList<Edge> edges) {
+    public static int[][] adjacencyUndirected(UndirectedGraph graph) {
+        var vertices = graph.getVertices();
+        var edges = graph.getEdges();
+
         int n = vertices.size();
         int[][] matrixBase = new int[n][n];
         for (Edge e : edges) {
@@ -17,11 +19,13 @@ public class AdjacencyMatrix {
         return matrixBase;
     }
 
-    public static int[][] adjacencyDirected(ArrayList<Vertex> vertices, ArrayList<Edge> edges) {
+    public static int[][] adjacencyDirected(DirectedGraph graph) {
+        var vertices = graph.getVertices();
+        var edges = graph.getEdges();
+
         int n = vertices.size();
         int[][] matrixBase = new int[n][n];
         for (Edge e : edges) {
-            System.out.println(e);
             Vertex v1 = e.getA();
             Vertex v2 = e.getB();
             int v1i = vertices.indexOf(v1);
@@ -35,7 +39,7 @@ public class AdjacencyMatrix {
         return matrixBase;
     }
 
-    public static String printMatrix(ArrayList<Vertex> vertices, int[][] res) {
+    private static String printMatrixReusable(int[][] res, List<Vertex> vertices){
         StringBuilder finalMatrix = new StringBuilder("__|");
         for (Vertex v : vertices) {
             finalMatrix.append(" %s |".formatted(v));
@@ -52,5 +56,15 @@ public class AdjacencyMatrix {
             index++;
         }
         return finalMatrix.toString();
+    }
+
+    public static String printMatrix(UndirectedGraph graph) {
+        var matrix = AdjacencyMatrix.adjacencyUndirected(graph);
+        return AdjacencyMatrix.printMatrixReusable(matrix, graph.getVertices());
+    }
+
+    public static String printMatrix(DirectedGraph graph) {
+        var matrix = AdjacencyMatrix.adjacencyDirected(graph);
+        return AdjacencyMatrix.printMatrixReusable(matrix, graph.getVertices());
     }
 }
