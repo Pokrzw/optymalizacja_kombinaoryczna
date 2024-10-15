@@ -31,7 +31,7 @@ public class AdjacencyMatrix {
             int v1i = vertices.indexOf(v1);
             int v2i = vertices.indexOf(v2);
             if (v1.getName().equals(v2.getName())){
-                matrixBase[v1i][v2i] += 2;
+                matrixBase[v1i][v2i] += 1;
             } else {
                 matrixBase[v1i][v2i]++;
             }

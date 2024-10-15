@@ -7,10 +7,11 @@ public class Main {
         DirectedGraph diGraph = new DirectedGraph(edges);
         UndirectedGraph unGraph = new UndirectedGraph(edges);
 
-//        var graph = diGraph;
-//        var one = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("1")).findFirst().get();
-//        var three = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("3")).findFirst().get();
-//        var two = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("2")).findFirst().get();
+        var graph = diGraph;
+        var one = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("1")).findFirst().get();
+        var three = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("3")).findFirst().get();
+        var two = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("2")).findFirst().get();
+
 //        graph.removeEdge(new Edge(one, one));
 //        graph.removeVertex(two);
 //        Vertex P = new Vertex("P");
@@ -19,8 +20,8 @@ public class Main {
 //        System.out.println(graph.getVertices());
 //        System.out.println(graph.getEdges());
 //        System.out.println(graph.getMappings());
-//        System.out.println(graph.getInDeg().toString());
-//        System.out.println(graph.getOutDeg().toString());
+        System.out.println(graph.getInDeg().toString());
+        System.out.println(graph.getOutDeg().toString());
         var adjacency = AdjacencyMatrix.printMatrix(diGraph);
         System.out.println("Directed graph adjacency matrix");
         System.out.println(adjacency);

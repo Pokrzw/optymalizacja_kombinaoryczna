@@ -67,9 +67,9 @@ public class DirectedGraph implements IGraph {
 
         ArrayList<Vertex> newAList = mapList.get(a);
         newAList.add(b);
-        if (a.getName().equals(b.getName())){
-            newAList.add(b);
-        }
+//        if (a.getName().equals(b.getName())){
+//            newAList.add(b);
+//        }
         mapList.put(a, newAList);
     }
 
@@ -140,7 +140,7 @@ public class DirectedGraph implements IGraph {
                 if (b==a){
                     ArrayList<Vertex> currValues = currentVertex.getValue();
                     currValues.remove(a);
-                    currValues.remove(a);
+//                    currValues.remove(a);
                     newInDeg.put(currentVertex.getKey(), currValues);
                 } else{
                     ArrayList<Vertex> currValues = currentVertex.getValue();
