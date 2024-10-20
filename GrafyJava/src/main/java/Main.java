@@ -8,9 +8,9 @@ public class Main {
         UndirectedGraph unGraph = new UndirectedGraph(edges);
 
         var graph = diGraph;
-        var one = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("1")).findFirst().get();
-        var three = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("3")).findFirst().get();
-        var two = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("2")).findFirst().get();
+        var one = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("a")).findFirst().get();
+        var three = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("b")).findFirst().get();
+        var two = graph.getVertices().stream().filter(vertex -> vertex.getName().equals("c")).findFirst().get();
 
 //        graph.removeEdge(new Edge(one, one));
 //        graph.removeVertex(two);
