@@ -30,5 +30,6 @@ public class Main {
         System.out.println(adjacency);
         GraphVizualization.generateUndirectedGraph(unGraph);
         GraphVizualization.generateDirectedGraph(diGraph);
+        VertexCoverApprox.VertexCover(unGraph);
     }
 }
