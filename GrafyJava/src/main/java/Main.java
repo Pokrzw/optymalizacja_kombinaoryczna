@@ -20,16 +20,17 @@ public class Main {
 //        System.out.println(graph.getVertices());
 //        System.out.println(graph.getEdges());
 //        System.out.println(graph.getMappings());
-        System.out.println(graph.getInDeg().toString());
-        System.out.println(graph.getOutDeg().toString());
-        var adjacency = AdjacencyMatrix.printMatrix(diGraph);
-        System.out.println("Directed graph adjacency matrix");
-        System.out.println(adjacency);
-        adjacency = AdjacencyMatrix.printMatrix(unGraph);
-        System.out.println("Undirected graph adjacency matrix");
-        System.out.println(adjacency);
-        GraphVizualization.generateUndirectedGraph(unGraph);
-        GraphVizualization.generateDirectedGraph(diGraph);
+//        Edge e = unGraph.getEdges().get(2);
+//        System.out.println(graph.getInDeg().toString());
+//        System.out.println(graph.getOutDeg().toString());
+//        var adjacency = AdjacencyMatrix.printMatrix(diGraph);
+//        System.out.println("Directed graph adjacency matrix");
+//        System.out.println(adjacency);
+//        adjacency = AdjacencyMatrix.printMatrix(unGraph);
+//        System.out.println("Undirected graph adjacency matrix");
+//        System.out.println(adjacency);
+//        GraphVizualization.vertexCoverUndirected(unGraph, e, "test", STAGE.GENERATE_GRAPH);
+//        GraphVizualization.generateDirectedGraph(diGraph);
         VertexCoverApprox.VertexCover(unGraph);
     }
 }

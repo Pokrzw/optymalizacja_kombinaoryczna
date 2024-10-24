@@ -1,0 +1,6 @@
+public enum STAGE {
+    GENERATE_GRAPH,
+    SELECT_EDGE,
+    SELECT_ADJECTENT,
+    REMOVE_EDGES
+}
