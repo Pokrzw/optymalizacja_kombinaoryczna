@@ -20,7 +20,7 @@ public class Main {
 //        System.out.println(graph.getVertices());
 //        System.out.println(graph.getEdges());
 //        System.out.println(graph.getMappings());
-//        Edge e = unGraph.getEdges().get(2);
+//        Edge e = unGraph.getEdges().get(2);F
 //        System.out.println(graph.getInDeg().toString());
 //        System.out.println(graph.getOutDeg().toString());
 //        var adjacency = AdjacencyMatrix.printMatrix(diGraph);

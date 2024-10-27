@@ -16,7 +16,7 @@
 <text text-anchor="middle" x="117" y="-67.8" font-family="Times,serif" font-size="14.00">g</text>
 </g>
 <!-- d&#45;&#45;g -->
-<g id="3" class="edge link&#45;class">
+<g id="2" class="edge link&#45;class">
 <title>d&#45;&#45;g</title>
 <path fill="none" stroke="black" d="M52.05,-52.38C64.57,-56.22 79.82,-60.9 92.29,-64.72"/>
 </g>
@@ -27,9 +27,9 @@
 <text text-anchor="middle" x="117" y="-13.8" font-family="Times,serif" font-size="14.00">f</text>
 </g>
 <!-- d&#45;&#45;f -->
-<g id="2" class="edge link&#45;class">
+<g id="1" class="edge link&#45;class">
 <title>d&#45;&#45;f</title>
-<path fill="none" stroke="black" d="M52.05,-37.62C64.57,-33.78 79.82,-29.1 92.29,-25.28"/>
+<path fill="none" stroke="red" d="M52.05,-37.62C64.57,-33.78 79.82,-29.1 92.29,-25.28"/>
 </g>
 </g>
 </svg>

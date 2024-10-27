@@ -14,8 +14,9 @@ import static guru.nidi.graphviz.model.Factory.*;
 public class GraphVizualization {
 
     public static void vertexCoverUndirected(IGraph graph, Edge e, String fileName, STAGE stage) throws IOException{
+
+
         ArrayList<Node> linkedVerts = new ArrayList<>();
-        System.out.println(graph.getVertices() );
         switch (stage){
             case SELECT_EDGE -> linkedVerts = GraphVizualization.generateColoredNode(graph, e);
             case SELECT_ADJECTENT -> linkedVerts = GraphVizualization.colorAdjNodes(graph, e);
@@ -31,6 +32,7 @@ public class GraphVizualization {
                         linkedVerts
                 );
 
+
         Graphviz.fromGraph(g).height(300).render(Format.SVG).toFile(new File(String.format("vertexCov/%s.svg", fileName)));
     }
     private static ArrayList<Node> removeAdjNodes(IGraph graph, Edge edge){
@@ -38,7 +40,6 @@ public class GraphVizualization {
         ArrayList<Node> nodes = new ArrayList<>();
         int i=1;
         HashSet<Vertex> unvisited = new HashSet<>(graph.getVertices());
-        System.out.println(unvisited);
         for (Edge e: edges){
             unvisited.remove(e.getA());
             unvisited.remove(e.getB());

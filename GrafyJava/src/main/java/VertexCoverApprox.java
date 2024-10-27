@@ -1,8 +1,13 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class VertexCoverApprox {
     static public int VertexCover(IGraph graph) throws IOException {
+        File dir = new File("vertexCov");
+        Stream.of(dir.listFiles())
+                .forEach(file -> file.delete());
         int stageCount = 0;
 //        IGraph graphCopy = graph;
         ArrayList<Edge> edges = graph.getEdges();
