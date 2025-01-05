@@ -1,17 +1,45 @@
 from task_class import Task
-from tree_test import test_in_forest, test_in_tree, test_out_tree, test_out_forest, switch_prec_direction
+from tree_test import test_in_forest, test_in_tree, test_out_tree, test_out_forest, switch_prec_direction, connect_in_forest
 import hu_alg
 
 M = 3
 
 def main(task_list: list[Task]):
-    if test_in_tree(task_list):
-        res=hu_alg.hus_alg(3, task_list)
+    if test_in_forest(task_list):
+        print("TUTAJ")
+        in_tree = connect_in_forest(task_list)
+        for task in in_tree:
+            task.set_level()
+            if task.name=="temp_root":
+                in_tree.remove(task)
+        res=hu_alg.hus_alg(M, task_list)
         hu_alg.draw_timetable(res)
         return
+    
+    if test_out_forest(task_list):
+        out_forest = switch_prec_direction(task_list)
+        in_tree = connect_in_forest(out_forest)
+        for task in in_tree:
+            task.set_level()
+        res=hu_alg.hus_alg(M, in_tree)
+        hu_alg.draw_timetable(res)
+        return
+
+    if test_in_tree(task_list):
+        for task in task_list:
+            task.set_level()
+        res=hu_alg.hus_alg(M, task_list)
+        hu_alg.draw_timetable(res)
+        return
+    
     if test_out_tree(task_list):
         in_tree = switch_prec_direction(task_list)
-        pass
+        res=hu_alg.hus_alg(M, in_tree)
+        hu_alg.draw_timetable(res)
+        return
+    
+    else:
+        print("Given data structure wasn't a tree of a forest")
 
 def create_tasks(order) -> list[Task]:
     tasks_dict={f"z{n}":Task(f"z{n}") for n in range(1, 19)}
@@ -76,7 +104,7 @@ order_1 = {
 in_tree_1: list[Task] = hu_alg.order_tasks_topographically(create_tasks(order_1)[:12])
 in_tree_2: list[Task] = hu_alg.order_tasks_topographically(create_tasks(forest)[:9])
 
-in_forest=create_tasks(forest)
 # out_tree=create_tasks(in_order)[:9]
 # out_forest=create_tasks_out(in_order)
-main(in_tree_1)
+main(in_tree_2)
+# hu_alg.hus_alg(M, in_tree_1)

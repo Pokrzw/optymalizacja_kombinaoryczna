@@ -90,13 +90,11 @@ public class VertexCoverApprox {
 
             stageCount++;
         }
-
         return vprime.size();
     }
 
     static private Edge genetrateRandomEdge(ArrayList<Edge> edges) {
         Random rand = new Random();
-
         int maxIndex = edges.size()-1;
         int randomIndex = (maxIndex>0) ? rand.nextInt(maxIndex) : 0;
         System.out.println("Wygenerowany indeks: " + randomIndex);

@@ -40,6 +40,10 @@ def draw_timetable(tt: list[list[tuple[int, tc.Task]]]):
         heights = []
         for m in range(len(tt)):
             if i >= len(tt[m]):
+                widths.append(0)
+                lefts.append(i)
+                heights.append(m)
+                labels.append("")
                 continue
             widths.append(1),
             lefts.append(i)

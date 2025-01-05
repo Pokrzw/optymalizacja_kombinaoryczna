@@ -29,7 +29,7 @@
 <!-- b&#45;&#45;c -->
 <g id="2" class="edge link&#45;class">
 <title>b&#45;&#45;c</title>
-<path fill="none" stroke="black" d="M144.4,-58.14C155.64,-58.14 168.72,-58.14 179.92,-58.14"/>
+<path fill="none" stroke="red" d="M144.4,-58.14C155.64,-58.14 168.72,-58.14 179.92,-58.14"/>
 </g>
 <!-- e -->
 <g id="node4" class="node">
@@ -40,7 +40,7 @@
 <!-- c&#45;&#45;e -->
 <g id="4" class="edge link&#45;class">
 <title>c&#45;&#45;e</title>
-<path fill="none" stroke="red" d="M233.5,-62C267.34,-67.14 326.73,-76.15 360.54,-81.27"/>
+<path fill="none" stroke="black" d="M233.5,-62C267.34,-67.14 326.73,-76.15 360.54,-81.27"/>
 </g>
 <!-- d -->
 <g id="node5" class="node">

@@ -92,8 +92,9 @@ z11.add_blocks([z12])
 z12.add_deps([z10, z11])
 z12.add_blocks([])
 
-# for t in all_tasks:
-#     t.set_level()
+for t in all_tasks:
+    t.set_level()
 
+import pprint
 
-# pprint.pprint(all_tasks)
+pprint.pprint(all_tasks)

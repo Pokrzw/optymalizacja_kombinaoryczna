@@ -1,0 +1,16 @@
+a 2 b
+b 2 c
+c 3 d
+d 4 e
+e 3 f
+f 5 g
+g 1 h
+h 1 a
+b 3 i
+d 3 i
+d 1 j
+e 2 j
+f 2 j
+g 4 j
+g 2 i
+h 4 i
